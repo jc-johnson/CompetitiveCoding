@@ -44,21 +44,39 @@ class Solution:
         :type sentence: list of str
         :rtype: int
         '''
-        word_to_index_last_seen_at = {}
-        nearest_repeated_entry_distance = sys.maxsize
+        word_to_index_hash_table = {}                       # keep hashmap for each word and its index <string word, int index>
+        nearest_repeated_entry_distance = sys.maxsize       # initialize variable 
 
-        for i in range(0, len(sentence)):
-            word = sentence[i]
+        split_String = sentence.split() # split string 
 
-            if word in word_to_index_last_seen_at:
-                last_appearance_index = word_to_index_last_seen_at[word]
+        # iterate through each word in given sentence 
+        for i in range(0, len(split_String)):
+            word = split_String[i]
+
+            # check our hashtable to see if we've seen the current word before 
+            if word in word_to_index_hash_table:
+
+                # get the last index where the current word appeared
+                last_appearance_index = word_to_index_hash_table[word]
+
+                # subtract the last_appearance_index from current index to get distance 
                 distance_to_last_appearance = i - last_appearance_index
 
+                # is this needed? 
                 nearest_repeated_entry_distance = min(
                     nearest_repeated_entry_distance,
                     distance_to_last_appearance
                 )
-
-            word_to_index_last_seen_at[word] = i
+            # update our hashtable with the current word and the current index
+            word_to_index_hash_table[word] = i
 
         return -1 if nearest_repeated_entry_distance == sys.maxsize else nearest_repeated_entry_distance
+
+def main():
+    print("hello world!")
+    s = Solution()
+    ans = s.distanceOfClosestRepeatedEntries("This is is my car")
+    print(ans)
+    
+if __name__ == "__main__":
+    main()
