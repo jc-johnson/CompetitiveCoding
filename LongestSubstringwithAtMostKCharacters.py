@@ -29,7 +29,17 @@ While traversing our string, we take the maximal length over all valid strings t
 This is computed on-the-fly. 
 
 The overall runtime of this algorithm is O(N) where N is the length of our string 
- since we visit each character at most twice (once by the left pointer and once by the right pointer).
+since we visit each character at most twice (once by the left pointer and once by the right pointer).
+
+Summary: 
+Use a variable to track the number of distinct numbers - k
+Use a variable to keep track of the maximum substring (initialize with 0). 
+Use 2 pointers to iterate through substrings via the given string
+Use a hashtable to track how many times we've seen a character
+When we have seen more than k unique characters, advance the left pointer and remove the left most character from the map
+Update maximum substring length each iteration (using max() function).
+Return maximum variable. 
+
 
 """
 
@@ -78,7 +88,7 @@ class Solution:
             # If the current window is greater than the max window, we update the max
             # maximum is updated every iteration
             # right pointer index - left pointer index + 1 since arrays and strings are 0 indexed  
-            maximum = max(right - left + 1, maximum)
+            maximum = max(right - left + 1, maximum) # calculating distance between 2 points in an array * 
             right += 1 # Increment right pointer (main pointer)
 
         return maximum
