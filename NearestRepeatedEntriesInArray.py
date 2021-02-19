@@ -62,14 +62,21 @@ class Solution:
                 # subtract the last_appearance_index from current index to get distance 
                 distance_to_last_appearance = i - last_appearance_index
 
-                # is this needed? 
+                # is the min comparison?
+                
                 nearest_repeated_entry_distance = min(
                     nearest_repeated_entry_distance,
                     distance_to_last_appearance
                 )
+                
+
+                # nearest_repeated_entry_distance is never updated 
+                
+
             # update our hashtable with the current word and the current index
             word_to_index_hash_table[word] = i
 
+        # return no duplicate entries found -- or the calculated duplicate entry distance 
         return -1 if nearest_repeated_entry_distance == sys.maxsize else nearest_repeated_entry_distance
 
 def main():

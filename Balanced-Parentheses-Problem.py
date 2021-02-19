@@ -3,6 +3,8 @@
     opening string matches. 
 """
 
+import unittest
+
 class Solution:
     ' class contructor '
     def __init__(self):
@@ -59,6 +61,7 @@ def main():
     print("hello world!")
     s = Solution()
     ans = s.isValid("(())")
+    assertTrue(ans)
     print(ans)
     test_isValid()
 
