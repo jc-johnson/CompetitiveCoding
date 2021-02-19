@@ -59,23 +59,21 @@ class Solution:
                 map[string[right]] = 1
                 num_distinct_chars += 1 # Increment the total number of distinct characters seen so far also 
 
+            # Once the number of distinct chars is greater than K
+            # We start removing all instances of the left most character from the iterative substring and the hash map
+            # There is no point in calculating more distinct numbers than k
+            # We only keep track of k number of characters in our hash map
+
             # We have now seen more than k different characters - start iterating through the string with our left pointer 
-            # Remove the left most character from our substring 
+            # Use our left pointer to remove the left most character from our substring 
             # We will be dropping one character from our substring so we can look at others 
             while num_distinct_chars > k: 
                 # We are now creating a substring within the given string with our left pointer 
-                # Decrement the counter for the char our left pointer is referencing 
-                # Updating left bound 
-                # Removing all instances of the left most character from the iterative substring and the hash map
-                # There is no point in calculating more distinct numbers than k
-                map[string[left]] -= 1
-                # This char isn't relevant to our final solution. 
-                # There is not enough instances of this character to be valid for our final answer. 
-                # We need at least k repeating characters. 
+                map[string[left]] -= 1 # Decrement the counter for the left most char in our map until it reaches 0. Once the counter is 0, remove it from map.
                 if map[string[left]] == 0:  # Remove this character from our map. We decremented it's count to equal 0 so we can remove it.
-                    num_distinct_chars -= 1 # Number of distinct chars must change to reflect the char deletion from the map. 
+                    num_distinct_chars -= 1     # Number of distinct chars must change to reflect the char deletion from the map. 
                     del map[string[left]]
-                left += 1       # Advance the left pointer 
+                left += 1       # Advance the left pointer of our substring
 
             # If the current window is greater than the max window, we update the max
             # maximum is updated every iteration
@@ -91,7 +89,7 @@ def main():
     s = Solution()
     ans = s.longestSubstringWithAtMostKDistinctCharacters("",2)
     print(ans)
-    
+
     ans = s.longestSubstringWithAtMostKDistinctCharacters("f",2)
     print(ans)
 
